@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imperium"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="900" Width="1600">
     <Grid>
+        <!-- Background 
+        <Grid.Background>
+           <ImageBrush ImageSource="Assets/Backgrounds/arena_bg.jpg" Stretch="UniformToFill"/> 
+        </Grid.Background> -->
+
+        <!-- Overlay: semi-transparent black -->
+        <Rectangle Fill="#AA000000" />
+
+        <!-- Center Content -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!-- Game Title -->
+            <TextBlock Text="IMPERIVM"
+                       FontSize="72"
+                       FontWeight="Bold"
+                       Foreground="Gold"
+                       HorizontalAlignment="Center"
+                       FontFamily="Georgia"
+                       TextAlignment="Center"/>
+
+            <!-- Menu Buttons -->
+            <StackPanel Width="300">
+                <Button Content="▶ Start New Game" Height="50" FontSize="18"/>
+                <Button Content="📂 Load Game" Height="50" FontSize="18"/>
+                <Button Content="⚙ Options" Height="50" FontSize="18"/>
+                <Button Content="❌ Exit" Height="50" FontSize="18"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Bottom Right Text -->
+        <TextBlock Text="Version 1.0 - The Ashen Arena"
+                   FontSize="14"
+                   Foreground="White"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0 0 20 10"/>
 
     </Grid>
 </Window>
