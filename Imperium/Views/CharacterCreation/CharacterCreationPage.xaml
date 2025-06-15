@@ -1,0 +1,128 @@
+﻿<Page x:Class="Imperium.Views.CharacterCreation.CharacterCreationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Imperium.Views.CharacterCreation"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CharacterCreationPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+
+        <!-- LEFT NAVIGATION MENU -->
+        <StackPanel Grid.Column="0" Background="#AA000000" Margin="0 0 0 10">
+            <Button Content="Class" Click="Class_Click"/>
+            <Button Content="Race" Click="Race_Click"/>
+            <Button Content="Background" Click="Background_Click"/>
+            <Button Content="Attributes" Click="Attributes_Click"/>
+            <Button Content="Finish" Click="Finish_Click"/>
+        </StackPanel>
+
+        <!-- RIGHT MAIN CONTENT -->
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Margin="20" Background="#AA000000">
+                
+
+                <!-- Name Inputs -->
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="First Name:" Foreground="White" Width="100"/>
+                    <TextBox x:Name="FirstNameBox" Width="200"/>
+                    <TextBlock Text="Last Name:" Foreground="White" Width="100"/>
+                    <TextBox x:Name="LastNameBox" Width="200"/>
+                </StackPanel>
+
+                <!-- Pronouns -->
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Pronouns:" Foreground="White" Width="100"/>
+                    <ComboBox x:Name="PronounsComboBox" Width="200">
+                        <ComboBoxItem Content="He/Him"/>
+                        <ComboBoxItem Content="She/Her"/>
+                        <ComboBoxItem Content="They/Them"/>
+                        <ComboBoxItem Content="Other"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Stats Section -->
+                <StackPanel>
+                    <TextBlock Text="Distribute 27 Points Across Stats" FontSize="18" Foreground="Gold"/>
+                    <UniformGrid Columns="2" Rows="7" Margin="0 10 0 0">
+                        <!-- Repeat per stat -->
+                        <StackPanel>
+                            <TextBlock Text="Strength (STR)" Foreground="White"/>
+                            <TextBox x:Name="STRBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Physical power and carry capacity" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Agility (AGI)" Foreground="White"/>
+                            <TextBox x:Name="AGIBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Speed, reflexes, and precision" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Endurance (END)" Foreground="White"/>
+                            <TextBox x:Name="ENDBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Stamina, toughness" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Intelligence (INT)" Foreground="White"/>
+                            <TextBox x:Name="INTBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Magical power and learning" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Wisdom (WIS)" Foreground="White"/>
+                            <TextBox x:Name="WISBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Magic control, resistance, insight" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Charisma (CHA)" Foreground="White"/>
+                            <TextBox x:Name="CHABox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Social presence, patron appeal" Foreground="Gray"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Luck (LCK)" Foreground="White"/>
+                            <TextBox x:Name="LCKBox" Width="60" HorizontalAlignment="Left" Text="0" TextChanged="StatBox_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="Fortune and variance" Foreground="Gray"/>
+                    </UniformGrid>
+
+                    <TextBlock x:Name="PointsRemainingText" Text="Points Remaining: 27" Foreground="White" Margin="0 10 0 0"/>
+                </StackPanel>
+
+                <!-- Selection Summary -->
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                    <StackPanel>
+                        <TextBlock Text="Class:" Foreground="White"/>
+                        <TextBlock x:Name="ClassSelectionText" Text="None" Foreground="Gold"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Race:" Foreground="White"/>
+                        <TextBlock x:Name="RaceSelectionText" Text="None" Foreground="Gold"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Background:" Foreground="White"/>
+                        <TextBlock x:Name="BackgroundSelectionText" Text="None" Foreground="Gold"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Attributes:" Foreground="White"/>
+                        <TextBlock x:Name="AttributesSelectionText" Text="None" Foreground="Gold"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Continue Button -->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

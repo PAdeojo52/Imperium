@@ -7,43 +7,54 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <Grid>
-        <!-- Background 
-        <Grid.Background>
-           <ImageBrush ImageSource="Assets/Backgrounds/arena_bg.jpg" Stretch="UniformToFill"/> 
-        </Grid.Background> -->
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
+            <Frame.Content>
+                <Grid>
 
-        <!-- Overlay: semi-transparent black -->
-        <Rectangle Fill="#AA000000" />
+                    <!-- Background Remeber to add pic if needed-->
+                    <Grid.Background>
+                        <ImageBrush  Stretch="UniformToFill"/>
+                    </Grid.Background>
 
-        <!-- Center Content -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Overlay -->
+                    <Rectangle Fill="#AA000000" />
 
-            <!-- Game Title -->
-            <TextBlock Text="IMPERIVM"
-                       FontSize="72"
-                       FontWeight="Bold"
-                       Foreground="Gold"
-                       HorizontalAlignment="Center"
-                       FontFamily="Georgia"
-                       TextAlignment="Center"/>
+                    <!-- Center Content -->
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <!-- Menu Buttons -->
-            <StackPanel Width="300">
-                <Button Content="▶ Start New Game" Height="50" FontSize="18"/>
-                <Button Content="📂 Load Game" Height="50" FontSize="18"/>
-                <Button Content="⚙ Options" Height="50" FontSize="18"/>
-                <Button Content="❌ Exit" Height="50" FontSize="18"/>
-            </StackPanel>
+                        <!-- Title -->
+                        <TextBlock Text="IMPERIVM"
+                               FontSize="72"
+                               FontWeight="Bold"
+                               Foreground="Gold"
+                               FontFamily="Georgia"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"/>
 
-        </StackPanel>
+                        <!-- Buttons -->
+                        <StackPanel Width="300">
+                            <Button Content="▶ Start New Game" Height="50" FontSize="18"
+                                Click="StartNewGame_Click"/>
+                            <Button Content="📂 Load Game" Height="50" FontSize="18"
+                                Click="LoadGame_Click"/>
+                            <Button Content="⚙ Options" Height="50" FontSize="18"
+                                Click="Options_Click"/>
+                            <Button Content="❌ Exit" Height="50" FontSize="18"
+                                Click="Exit_Click"/>
+                        </StackPanel>
 
-        <!-- Bottom Right Text -->
-        <TextBlock Text="Version 1.0 - The Ashen Arena"
-                   FontSize="14"
-                   Foreground="White"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Margin="0 0 20 10"/>
+                    </StackPanel>
 
+                    <!-- Bottom Right -->
+                    <TextBlock Text="Version 1.0 - The Ashen Arena"
+                           FontSize="14"
+                           Foreground="White"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Margin="0 0 20 10"/>
+
+                </Grid>
+            </Frame.Content>
+        </Frame>
     </Grid>
 </Window>
