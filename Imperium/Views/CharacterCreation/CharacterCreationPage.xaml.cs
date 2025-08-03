@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Imperium.Data.Models;
+using Imperium.Services;
 
 namespace Imperium.Views.CharacterCreation
 {
@@ -64,6 +66,24 @@ namespace Imperium.Views.CharacterCreation
         {
             MessageBox.Show("Finish clicked.");
         }
+
+        /// <summary>
+        /// To be used later. 
+        /// </summary>
+        /*private void SaveGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            string saveName = SaveNameTextBox.Text;
+
+            // Get DB connection for this save file
+            var connection = DbConnectionFactory.GetConnectionForSaveFile(saveName); // your implementation
+
+            var repository = new SaveMetadataRepository(connection);
+            var saveService = new SaveService(repository);
+
+            saveService.SaveMetadata(saveName);
+
+            MessageBox.Show("Save created!");
+        }*/
 
 
         private int MaxPoints = 27;
