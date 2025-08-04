@@ -41,9 +41,9 @@ namespace Imperium.Views.CharacterCreation
         public string? Difficulty { get; }
 
 
-        private void Class_Click(object sender, RoutedEventArgs e)
+        private void Customization_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Class selection clicked.");
+            NavigationService?.Navigate(new ClassSelectPage()); NavigationService?.Navigate(new ClassSelectPage());
             // TODO: Navigate to ClassSelectPage or open modal
         }
 

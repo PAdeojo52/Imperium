@@ -14,21 +14,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        
+
 
         <!-- LEFT NAVIGATION MENU -->
         <StackPanel Grid.Column="0" Background="#AA000000" Margin="0 0 0 10">
-            <Button Content="Class" Click="Class_Click"/>
-            <Button Content="Race" Click="Race_Click"/>
-            <Button Content="Background" Click="Background_Click"/>
-            <Button Content="Attributes" Click="Attributes_Click"/>
-            <Button Content="Finish" Click="Finish_Click"/>
+            <Button Content="Character Customization" Click="Customization_Click" Height="62"/>
+            <Button Content="Finish" Click="Finish_Click" Height="60"/>
         </StackPanel>
 
         <!-- RIGHT MAIN CONTENT -->
         <ScrollViewer Grid.Column="1">
             <StackPanel Margin="20" Background="#AA000000">
-                
+
 
                 <!-- Name Inputs -->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">

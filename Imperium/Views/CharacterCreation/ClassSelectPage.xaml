@@ -9,6 +9,58 @@
       Title="ClassSelectPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT PANEL: Available Attributes -->
+        <StackPanel Grid.Column="0" Background="#AA000000" Margin="0,0,10,0">
+            <TextBlock Text="Available attributes"
+                 FontSize="16" FontWeight="Bold"
+                 Foreground="Yellow"/>
+
+            <TabControl x:Name="AttributeTabs" Height="30">
+                <TabItem Header="Class" />
+                <TabItem Header="Background" />
+                <TabItem Header="Race" />
+                <TabItem Header="Attributes" />
+                <TabItem Header="Addictions" />
+            </TabControl>
+
+            <ComboBox x:Name="AvailableAttributesComboBox"
+                Height="25"/>
+
+            <TextBox x:Name="AttributeDescriptionTextBox"
+               Height="100"
+               IsReadOnly="True"
+               TextWrapping="Wrap"
+               VerticalScrollBarVisibility="Auto"/>
+
+           <!--- <CheckBox x:Name="HiddenCheckBox"
+                Content="Make this attribute hidden when added."/> -->
+
+           <!--- <CheckBox x:Name="PermanentCheckBox"
+                Content="Make this attribute permanent when added."/> -->
+
+            <Button x:Name="AddAttributeButton"
+              Content="Add This Attribute"
+              Width="150" Height="30"/>
+
+            <!---<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,20,0,0">
+                <TextBlock Text="Clone the attributes of..." VerticalAlignment="Center"/>
+                <ComboBox x:Name="CloneFromComboBox" Width="150"/>
+                <Button x:Name="CloneButton" Content="Clone" Width="80"/>
+        </StackPanel>  -->
+        </StackPanel>
+
+        <!-- RIGHT PANEL: Current Attributes -->
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Current attributes"
+                 FontSize="16" FontWeight="Bold"
+                 Foreground="Yellow"/>
+
+            <ListBox x:Name="CurrentAttributesListBox"/>
+        </StackPanel>
     </Grid>
 </Page>
