@@ -20,7 +20,7 @@
                  FontSize="16" FontWeight="Bold"
                  Foreground="Yellow"/>
 
-            <TabControl x:Name="AttributeTabs" Height="30">
+            <TabControl x:Name="AttributeTabs" Height="30"  SelectionChanged="AttributeTabs_SelectionChanged">
                 <TabItem Header="Race" />
                 <TabItem Header="Background" />
                 <TabItem Header="Class" />
@@ -29,7 +29,8 @@
             </TabControl>
 
             <ComboBox x:Name="AvailableAttributesComboBox"
-                Height="25"/>
+                Height="25"
+                SelectionChanged="AvailableAttributesComboBox_SelectionChanged"/>
 
             <TextBox x:Name="AttributeDescriptionTextBox"
                Height="100"
@@ -61,7 +62,7 @@
                  Foreground="Yellow"
                  Background="#AA000000"/>
 
-            <ListBox x:Name="CurrentAttributesListBox"/>
+            <ListBox x:Name="CurrentAttributesListBox" />
         </StackPanel>
     </Grid>
 </Page>
