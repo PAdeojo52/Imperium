@@ -21,9 +21,9 @@
                  Foreground="Yellow"/>
 
             <TabControl x:Name="AttributeTabs" Height="30">
-                <TabItem Header="Class" />
-                <TabItem Header="Background" />
                 <TabItem Header="Race" />
+                <TabItem Header="Background" />
+                <TabItem Header="Class" />
                 <TabItem Header="Attributes" />
                 <TabItem Header="Addictions" />
             </TabControl>
@@ -58,7 +58,8 @@
         <StackPanel Grid.Column="1">
             <TextBlock Text="Current attributes"
                  FontSize="16" FontWeight="Bold"
-                 Foreground="Yellow"/>
+                 Foreground="Yellow"
+                 Background="#AA000000"/>
 
             <ListBox x:Name="CurrentAttributesListBox"/>
         </StackPanel>
