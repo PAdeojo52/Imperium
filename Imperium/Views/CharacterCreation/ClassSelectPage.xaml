@@ -30,7 +30,7 @@
 
             <ComboBox x:Name="AvailableAttributesComboBox"
                 Height="25"
-                SelectionChanged="AvailableAttributesComboBox_SelectionChanged"/>
+                 SelectionChanged="AvailableAttributesComboBox_SelectionChanged"/>
 
             <TextBox x:Name="AttributeDescriptionTextBox"
                Height="100"
