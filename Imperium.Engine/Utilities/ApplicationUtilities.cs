@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Imperium.Data.EntityModels.Character;
+using Imperium.Engine.Data.EntityModels.Character;
 
-namespace Imperium.Utilities
+namespace Imperium.Engine.Utilities
 {
     public static class ApplicationUtilities
     {

@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\EntityModels\**" />
+    <EmbeddedResource Remove="Data\EntityModels\**" />
+    <None Remove="Data\EntityModels\**" />
+    <Page Remove="Data\EntityModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Helpers\" />
     <Folder Include="Resources\" />

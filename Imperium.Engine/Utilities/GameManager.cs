@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imperium.Data.EntityModels.World
+namespace Imperium.Engine.Utilities
 {
-    class Province
+    public static class GameManager
     {
     }
 }

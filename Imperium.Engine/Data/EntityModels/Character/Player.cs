@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imperium.Data.EntityModels.Character
+namespace Imperium.Engine.Data.EntityModels.Character
 {
     public class Player
     {

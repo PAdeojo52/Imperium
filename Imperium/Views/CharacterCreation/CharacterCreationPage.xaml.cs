@@ -13,10 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Imperium.Data.EntityModels.Character;
+using Imperium.Engine.Data.EntityModels.Character;
 using Imperium.Data.Models;
-using Imperium.Services;
-using Imperium.Utilities;
+using Imperium.Engine.Services;
+using Imperium.Engine.Utilities;
 
 namespace Imperium.Views.CharacterCreation
 {
