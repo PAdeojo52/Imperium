@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imperium", "Imperium\Imperium.csproj", "{7B4C0D98-30A4-4F93-80ED-6AA87848D9C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imperium.Engine", "Imperium.Engine\Imperium.Engine.csproj", "{5034589C-DCE7-45D5-8D50-9A708D4996B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7B4C0D98-30A4-4F93-80ED-6AA87848D9C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B4C0D98-30A4-4F93-80ED-6AA87848D9C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B4C0D98-30A4-4F93-80ED-6AA87848D9C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5034589C-DCE7-45D5-8D50-9A708D4996B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5034589C-DCE7-45D5-8D50-9A708D4996B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5034589C-DCE7-45D5-8D50-9A708D4996B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5034589C-DCE7-45D5-8D50-9A708D4996B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

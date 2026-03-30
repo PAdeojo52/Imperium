@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Imperium.Data.EntityModels.Character;
 using Imperium.Data.Models;
 using Imperium.Services;
+using Imperium.Utilities;
 
 namespace Imperium.Views.CharacterCreation
 {
@@ -23,6 +26,21 @@ namespace Imperium.Views.CharacterCreation
     public partial class CharacterCreationPage : Page
     {
         private bool _isLoaded = false;
+        // Assuming these TextBox controls exist in the corresponding XAML file.  
+        private TextBox FirstNameTextBox;
+        private TextBox LastNameTextBox;
+        private ComboBox RaceComboBox;
+        private ComboBox BackgroundComboBox;
+        private ComboBox ClassComboBox;
+        private TextBox STRBoxValue;
+        private TextBox AGIBoxValue;
+        private TextBox ENDBoxValue;
+        private TextBox INTBoxValue;
+        private TextBox WISBoxValue;
+        private TextBox CHABoxValue;
+        private TextBox LCKBoxValue;
+        //private TextBlock PointsRemainingText;
+        private Button NextButton;
         public CharacterCreationPage()
         {
             InitializeComponent();
@@ -64,7 +82,21 @@ namespace Imperium.Views.CharacterCreation
 
         private void Finish_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Finish clicked.");
+            // Create a new Player object and populate its properties using an object initializer
+            var player = new Player
+            {
+                FirstName = FirstNameTextBox?.Text.Trim() ?? string.Empty,
+                LastName = LastNameTextBox?.Text.Trim() ?? string.Empty,
+                //Pronouns = PronounsComboBox?.SelectedItem as string ?? string.Empty,
+                RaceID = (RaceComboBox?.SelectedItem as Race)?.RaceID ?? 0,
+                BackgroundID = (BackgroundComboBox?.SelectedItem as Background)?.BackgroundID ?? 0,
+                //ClassID = (ClassComboBox?.SelectedItem as Class)?.ClassID ?? 0
+            };
+
+            // TODO: pull in any Attributes selections and add them to player.AttributesList
+
+            // Now CurrentPlayer is populated and you can navigate on:
+            //NavigationService?.Navigate(new CharacterCustomizationPage());
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Imperium.Data.EntityModels.Character;
 
 namespace Imperium.Utilities
 {
@@ -17,7 +18,7 @@ namespace Imperium.Utilities
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         static Process[] ImpProc = Process.GetProcessesByName("Imperium");
 
-        
+        public static Player CurrentPlayer  = new Player();
 
         private const int SW_HIDE = 0;
         private const int SW_SHOWNORMAL = 1;
@@ -41,6 +42,7 @@ namespace Imperium.Utilities
                 if (hWnd == IntPtr.Zero)
                 {
                     Console.WriteLine("No main window handle found for process " + processId);
+                    
                     return;
                 }
 
