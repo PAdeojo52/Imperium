@@ -15,10 +15,10 @@ namespace Imperium.Engine.Utilities
     /// Owns the GameCalendar and orchestrates cross-system triggers
     /// when the player advances turns, completes fights, etc.
     /// </summary>
-    public class GameManager
+    public static class GameManager
     {
         // --- Dependencies ---
-        private readonly ICalendarService _calendarService;
+        private static readonly ICalendarService _calendarService;
         // TODO: Add other service interfaces as systems are built:
         // private readonly IPlayerService _playerService;
         // private readonly IArenaService _arenaService;
@@ -26,8 +26,8 @@ namespace Imperium.Engine.Utilities
         // private readonly IDynastyService _dynastyService;
 
         // --- State ---
-        public GameCalendar Calendar { get; private set; } = new();
-        private int _currentSaveId;
+        public static GameCalendar Calendar { get; private set; } = new();
+        private static int _currentSaveId;
 
         // --- Events (C# events for WPF/MVVM binding) ---
 
@@ -35,34 +35,34 @@ namespace Imperium.Engine.Utilities
         /// Fired after each day advance with the new date. 
         /// ViewModels can subscribe for UI updates.
         /// </summary>
-        public event Action<CalendarDate>? OnDayAdvanced;
+        public static event Action<CalendarDate>? OnDayAdvanced;
 
         /// <summary>
         /// Fired when the calendar crosses into a new month.
         /// Useful for league season checks, patron payments, etc.
         /// </summary>
-        public event Action<int, int>? OnNewMonth; // (month, year)
+        public static event Action<int, int>? OnNewMonth; // (month, year)
 
         /// <summary>
         /// Fired when the calendar crosses into a new year.
         /// Triggers age progression, annual reputation decay, dynasty updates.
         /// </summary>
-        public event Action<int>? OnNewYear; // (year)
+        public static event Action<int>? OnNewYear; // (year)
 
         /// <summary>
         /// Fired when a scheduled calendar event triggers on the current day.
         /// The ViewModel or subsystem handler should react accordingly.
         /// </summary>
-        public event Action<CalendarEvent>? OnCalendarEventTriggered;
+        public static event Action<CalendarEvent>? OnCalendarEventTriggered;
 
         // -----------------------------------------------------------------
         //  Constructor
         // -----------------------------------------------------------------
 
-        public GameManager(ICalendarService calendarService)
+        /*public GameManager(ICalendarService calendarService)
         {
             _calendarService = calendarService;
-        }
+        }*/
 
         // -----------------------------------------------------------------
         //  Initialization & Save/Load
@@ -72,7 +72,7 @@ namespace Imperium.Engine.Utilities
         /// Called when starting a new game. Sets the calendar to Day 1, Month 1, Year 1
         /// (or a configurable start date).
         /// </summary>
-        public void InitializeNewGame(int saveId, CalendarDate? startDate = null)
+        public static void InitializeNewGame(int saveId, CalendarDate? startDate = null)
         {
             _currentSaveId = saveId;
             Calendar = new GameCalendar
@@ -89,7 +89,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Load the calendar (and eventually all systems) from a save file.
         /// </summary>
-        public void LoadGame(int saveId)
+        public static void LoadGame(int saveId)
         {
             _currentSaveId = saveId;
             Calendar = _calendarService.LoadCalendar(saveId);
@@ -102,7 +102,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Persist all game state to the database.
         /// </summary>
-        public void SaveGame()
+        public static void SaveGame()
         {
             _calendarService.SaveCalendar(_currentSaveId, Calendar);
 
@@ -121,7 +121,7 @@ namespace Imperium.Engine.Utilities
         ///   2. Check for and fire calendar events
         ///   3. Check for month/year boundaries → trigger cross-system updates
         /// </summary>
-        public void AdvanceTurn()
+        public static void AdvanceTurn()
         {
             // 1. Advance the day and collect triggered events
             List<CalendarEvent> triggeredEvents = Calendar.AdvanceDay();
@@ -158,7 +158,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Schedule an arena match on a specific date.
         /// </summary>
-        public void ScheduleArenaMatch(string title, CalendarDate date, int arenaId, int priority = 3)
+        public static void ScheduleArenaMatch(string title, CalendarDate date, int arenaId, int priority = 3)
         {
             var matchEvent = new CalendarEvent
             {
@@ -177,7 +177,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Schedule a patron summons or festival.
         /// </summary>
-        public void SchedulePatronEvent(string title, CalendarDate date, int patronId,
+        public static void SchedulePatronEvent(string title, CalendarDate date, int patronId,
             CalendarEventType type = CalendarEventType.PatronSummons)
         {
             var patronEvent = new CalendarEvent
@@ -197,7 +197,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Schedule a recurring annual event (festival, birthday, league season start).
         /// </summary>
-        public void ScheduleRecurringEvent(string title, int month, int day,
+        public static void ScheduleRecurringEvent(string title, int month, int day,
             CalendarEventType type, string? description = null)
         {
             var recurring = new CalendarEvent
@@ -217,7 +217,7 @@ namespace Imperium.Engine.Utilities
         /// <summary>
         /// Generic event scheduling for any system.
         /// </summary>
-        public void ScheduleEvent(CalendarEvent calendarEvent)
+        public static void ScheduleEvent(CalendarEvent calendarEvent)
         {
             Calendar.AddEvent(calendarEvent);
             _calendarService.CreateEvent(_currentSaveId, calendarEvent);
@@ -232,7 +232,7 @@ namespace Imperium.Engine.Utilities
         /// This is where the "central hub" pattern pays off — all cross-system 
         /// coordination lives here instead of scattered across services.
         /// </summary>
-        private void ProcessCalendarEvent(CalendarEvent calendarEvent)
+        private static void ProcessCalendarEvent(CalendarEvent calendarEvent)
         {
             // Fire the general event for UI/ViewModel subscribers
             OnCalendarEventTriggered?.Invoke(calendarEvent);
@@ -293,7 +293,7 @@ namespace Imperium.Engine.Utilities
         //  Subsystem Handlers (Stubs — flesh out as systems are built)
         // -----------------------------------------------------------------
 
-        private void HandleNewMonth()
+        private static void HandleNewMonth()
         {
             int month = Calendar.CurrentDate.Month;
             int year = Calendar.CurrentDate.Year;
@@ -307,7 +307,7 @@ namespace Imperium.Engine.Utilities
             // - Merchant inventory refresh
         }
 
-        private void HandleNewYear()
+        private static void HandleNewYear()
         {
             int year = Calendar.CurrentDate.Year;
 
@@ -322,7 +322,7 @@ namespace Imperium.Engine.Utilities
             // Calendar.CleanupCompletedEvents();
         }
 
-        private void HandleArenaMatchEvent(CalendarEvent calendarEvent)
+        private static void HandleArenaMatchEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger arena match flow
             // - Look up arena via calendarEvent.RelatedEntityId
@@ -330,14 +330,14 @@ namespace Imperium.Engine.Utilities
             // - Transition to battle panel
         }
 
-        private void HandlePatronEvent(CalendarEvent calendarEvent)
+        private static void HandlePatronEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger patron interaction
             // - Summons: Present patron dialogue and quest
             // - Festival: Attendance check, favor gain/loss
         }
 
-        private void HandleDynastyEvent(CalendarEvent calendarEvent)
+        private static void HandleDynastyEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger dynasty updates
             // - Birthday: Age up family member, check milestones
@@ -345,7 +345,7 @@ namespace Imperium.Engine.Utilities
             // - HeirBorn: Add new family member, roll traits
         }
 
-        private void HandleLeagueEvent(CalendarEvent calendarEvent)
+        private static void HandleLeagueEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger league phase transitions
             // - Season start: Reset standings
@@ -354,7 +354,7 @@ namespace Imperium.Engine.Utilities
             // - Championship: Award title, prestige, gear
         }
 
-        private void HandleAgingEvent(CalendarEvent calendarEvent)
+        private static void HandleAgingEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger age milestone logic
             // - ComingOfAge (20): Unlock specialization path
@@ -362,14 +362,14 @@ namespace Imperium.Engine.Utilities
             // - RetirementDuel (50+): Farewell fight, legacy mode
         }
 
-        private void HandleTrainingEvent(CalendarEvent calendarEvent)
+        private static void HandleTrainingEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger training session
             // - Skill XP gain
             // - Mentor-specific bonuses
         }
 
-        private void HandlePoliticalEvent(CalendarEvent calendarEvent)
+        private static void HandlePoliticalEvent(CalendarEvent calendarEvent)
         {
             // TODO: Trigger world events
             // - Royal decrees affecting arena rules

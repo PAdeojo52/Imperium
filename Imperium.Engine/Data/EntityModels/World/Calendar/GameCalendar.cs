@@ -74,7 +74,7 @@ namespace Imperium.Engine.Data.EntityModels.World.Calendar
         /// <summary>
         /// Current season derived from the month.
         /// </summary>
-        public Seasons CurrentSeason => CurrentDate.CurrentSeason;
+        //public Seasons CurrentSeason => CurrentDate.CurrentSeason;
 
         // -----------------------------------------------------------------
         //  Event Management
