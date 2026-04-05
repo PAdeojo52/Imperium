@@ -189,7 +189,7 @@ namespace Imperium.Engine.Utilities
                 RelatedEntityType = "Patron",
                 Priority = 2
             };
-
+             
             Calendar.AddEvent(patronEvent);
             _calendarService.CreateEvent(_currentSaveId, patronEvent);
         }

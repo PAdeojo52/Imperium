@@ -1,0 +1,194 @@
+﻿<mah:MetroWindow x:Class="Imperium.Views.CharacterCreation.CharacterCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="IMPERIVM — Create Your Gladiator" Height="900" Width="1600"
+        WindowStartupLocation="CenterScreen"
+        ShowTitleBar="False" BorderThickness="0"
+        Background="{StaticResource BgDeepBrush}">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <!-- Left: Character Preview Panel -->
+            <ColumnDefinition Width="320"/>
+            <!-- Right: Step Content -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ============================================================ -->
+        <!-- LEFT: Character Preview & Summary -->
+        <!-- ============================================================ -->
+        <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,10,0">
+            <DockPanel>
+                <!-- Top: Avatar area -->
+                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    <Border Width="100" Height="100" CornerRadius="50" 
+                            Background="#2E4057" Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="AccountCircle" 
+                                                    Width="50" Height="50" 
+                                                    Foreground="{StaticResource TextMutedBrush}"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock x:Name="PreviewName" Text="Your Gladiator"
+                               FontSize="18" FontWeight="Bold" 
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="PreviewSubtitle" Text="Awaiting creation..."
+                               FontSize="12" Foreground="{StaticResource TextMutedBrush}"
+                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Divider -->
+                <Rectangle DockPanel.Dock="Top" Height="1" 
+                           Fill="{StaticResource BorderSubtleBrush}" Margin="0,0,0,16"/>
+
+                <!-- Summary fields -->
+                <StackPanel DockPanel.Dock="Top">
+                    <!-- Race -->
+                    <Grid Margin="0,0,0,12">
+                        <TextBlock Text="Race" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock x:Name="SummaryRace" Text="—" 
+                                   Foreground="{StaticResource AccentGoldBrush}" 
+                                   FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    </Grid>
+                    <!-- Class -->
+                    <Grid Margin="0,0,0,12">
+                        <TextBlock Text="Class" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock x:Name="SummaryClass" Text="—" 
+                                   Foreground="{StaticResource AccentGoldBrush}" 
+                                   FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    </Grid>
+                    <!-- Background -->
+                    <Grid Margin="0,0,0,12">
+                        <TextBlock Text="Background" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock x:Name="SummaryBackground" Text="—" 
+                                   Foreground="{StaticResource AccentGoldBrush}" 
+                                   FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <!-- Divider -->
+                    <Rectangle Height="1" Fill="{StaticResource BorderSubtleBrush}" Margin="0,4,0,16"/>
+
+                    <!-- Stats preview -->
+                    <TextBlock Text="ATTRIBUTES" Style="{StaticResource SectionHeaderStyle}"/>
+                    <UniformGrid Columns="2" Rows="4">
+                        <TextBlock x:Name="PreviewSTR" Text="STR: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewAGI" Text="AGI: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewEND" Text="END: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewINT" Text="INT: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewWIS" Text="WIS: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewCHA" Text="CHA: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                        <TextBlock x:Name="PreviewLCK" Text="LCK: —" FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2"/>
+                    </UniformGrid>
+                </StackPanel>
+
+                <!-- Bottom spacer -->
+                <StackPanel/>
+            </DockPanel>
+        </Border>
+
+        <!-- ============================================================ -->
+        <!-- RIGHT: Step Content Area -->
+        <!-- ============================================================ -->
+        <DockPanel Grid.Column="1">
+
+            <!-- Step indicator bar at top -->
+            <Border DockPanel.Dock="Top" Margin="10,0,0,12">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!-- Step 1: Identity -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,8,0">
+                        <Border x:Name="Step1Circle" Style="{StaticResource StepActiveStyle}">
+                            <TextBlock Text="1" FontSize="14" FontWeight="Bold" 
+                                       Foreground="#1A1A2E" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="Step1Label" Text="Identity" FontSize="12" 
+                                   Foreground="{StaticResource AccentGoldBrush}" 
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <Rectangle Width="40" Height="2" Fill="{StaticResource BorderSubtleBrush}" 
+                               VerticalAlignment="Center" Margin="8,0"/>
+
+                    <!-- Step 2: Race -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,8,0">
+                        <Border x:Name="Step2Circle" Style="{StaticResource StepInactiveStyle}">
+                            <TextBlock Text="2" FontSize="14" FontWeight="Bold" 
+                                       Foreground="{StaticResource TextMutedBrush}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="Step2Label" Text="Race" FontSize="12" 
+                                   Foreground="{StaticResource TextMutedBrush}" 
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <Rectangle Width="40" Height="2" Fill="{StaticResource BorderSubtleBrush}" 
+                               VerticalAlignment="Center" Margin="8,0"/>
+
+                    <!-- Step 3: Class -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,8,0">
+                        <Border x:Name="Step3Circle" Style="{StaticResource StepInactiveStyle}">
+                            <TextBlock Text="3" FontSize="14" FontWeight="Bold" 
+                                       Foreground="{StaticResource TextMutedBrush}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="Step3Label" Text="Class" FontSize="12" 
+                                   Foreground="{StaticResource TextMutedBrush}" 
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <Rectangle Width="40" Height="2" Fill="{StaticResource BorderSubtleBrush}" 
+                               VerticalAlignment="Center" Margin="8,0"/>
+
+                    <!-- Step 4: Attributes -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,8,0">
+                        <Border x:Name="Step4Circle" Style="{StaticResource StepInactiveStyle}">
+                            <TextBlock Text="4" FontSize="14" FontWeight="Bold" 
+                                       Foreground="{StaticResource TextMutedBrush}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="Step4Label" Text="Attributes" FontSize="12" 
+                                   Foreground="{StaticResource TextMutedBrush}" 
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <Rectangle Width="40" Height="2" Fill="{StaticResource BorderSubtleBrush}" 
+                               VerticalAlignment="Center" Margin="8,0"/>
+
+                    <!-- Step 5: Review -->
+                    <StackPanel Orientation="Horizontal">
+                        <Border x:Name="Step5Circle" Style="{StaticResource StepInactiveStyle}">
+                            <TextBlock Text="5" FontSize="14" FontWeight="Bold" 
+                                       Foreground="{StaticResource TextMutedBrush}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="Step5Label" Text="Review" FontSize="12" 
+                                   Foreground="{StaticResource TextMutedBrush}" 
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Navigation buttons at bottom -->
+            <Grid DockPanel.Dock="Bottom" Margin="10,12,0,0">
+                <Button x:Name="BackStepButton" Content="Back" 
+                        Style="{StaticResource GhostButtonStyle}"
+                        HorizontalAlignment="Left" Click="BackStep_Click"/>
+                <Button x:Name="NextStepButton" Content="Next" 
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        HorizontalAlignment="Right" Click="NextStep_Click"/>
+            </Grid>
+
+            <!-- Swappable content area -->
+            <ContentControl x:Name="StepContent" Margin="10,0,0,0"/>
+        </DockPanel>
+    </Grid>
+</mah:MetroWindow>

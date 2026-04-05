@@ -25,6 +25,13 @@
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.BootstrapIcons" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.BoxIcons" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Core" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.GameIcons" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.RPGAwesome" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.WeatherIcons" Version="6.2.1" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.7" />
   </ItemGroup>
 

@@ -12,17 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace Imperium.Views.MainMenu
 {
     /// <summary>
     /// Interaction logic for LoadGamePage.xaml
     /// </summary>
-    public partial class LoadGamePage : Page
+    public partial class LoadGamePage : MetroWindow
     {
         public LoadGamePage()
         {
             InitializeComponent();
         }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
+
     }
 }

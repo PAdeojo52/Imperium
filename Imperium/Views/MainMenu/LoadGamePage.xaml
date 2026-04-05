@@ -1,18 +1,39 @@
-﻿<Page x:Class="Imperium.Views.MainMenu.LoadGamePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Imperium.Views.MainMenu"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoadGamePage">
+﻿<mah:MetroWindow x:Class="Imperium.Views.MainMenu.LoadGamePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="IMPERIVM — Load Game" Height="900" Width="1600"
+        WindowStartupLocation="CenterScreen"
+        ShowTitleBar="False" BorderThickness="0"
+        Background="{StaticResource BgDeepBrush}">
 
     <Grid>
-        <TextBlock Text="Load Game Page"
-                   Foreground="White"
-                   FontSize="36"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Border Style="{StaticResource CardStyle}" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="600" Padding="40">
+            <StackPanel>
+                <TextBlock Text="LOAD GAME" Style="{StaticResource PageHeaderStyle}" 
+                           HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <TextBlock Text="Select a save file to continue your journey."
+                           Style="{StaticResource SubtitleStyle}" Margin="0,0,0,32"/>
+
+                <!-- Save file list placeholder -->
+                <Border Background="{StaticResource BgInputBrush}" 
+                        CornerRadius="6" Padding="16" MinHeight="200" Margin="0,0,0,24">
+                    <TextBlock Text="No save files found." 
+                               FontSize="14" Foreground="{StaticResource TextDimBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <!-- TODO: Replace with ListBox bound to save metadata from DB -->
+                </Border>
+
+                <Grid>
+                    <Button Content="Back" Style="{StaticResource GhostButtonStyle}"
+                            HorizontalAlignment="Left" Click="BackButton_Click"/>
+                    <Button Content="Load" Style="{StaticResource PrimaryButtonStyle}"
+                            HorizontalAlignment="Right" IsEnabled="False"/>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
-</Page>
+</mah:MetroWindow>

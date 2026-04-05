@@ -9,13 +9,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Imperium.Views.MainMenu;
+using MahApps.Metro.Controls;
 
 namespace Imperium
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -24,17 +25,23 @@ namespace Imperium
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new GameSetupPage()); 
+            var setup = new GameSetupWindow();
+            setup.Show();
+            this.Close();
         }
 
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new LoadGamePage());
+            var load = new LoadGamePage();
+            load.Show();
+            this.Close();
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new OptionsPage());
+            var options = new OptionsPage();
+            options.Owner = this;
+            options.ShowDialog();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

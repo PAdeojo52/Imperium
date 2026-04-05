@@ -1,0 +1,408 @@
+﻿<UserControl x:Class="Imperium.Views.Dashboard.Dashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1500"
+             Background="#1A1A2E">
+
+    <UserControl.Resources>
+        <!-- Card panel style -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#16213E"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="6"/>
+        </Style>
+
+        <!-- Stat value -->
+        <Style x:Key="StatValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#4FC3F7"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Stat label -->
+        <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#667788"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+
+        <!-- Checklist item style -->
+        <Style x:Key="ChecklistTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#AABBCC"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ChecklistSubTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#556677"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+
+        <!-- Link-style text -->
+        <Style x:Key="LinkTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#4FC3F7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Small action button -->
+        <Style x:Key="SmallActionButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#4FC3F7"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#4FC3F7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#1A3A5A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16">
+        <StackPanel>
+
+            <!-- ======================================================== -->
+            <!-- ROW 1: Player Overview Card (full width) -->
+            <!-- ======================================================== -->
+            <Border Style="{StaticResource CardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left: Player name & class -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Player avatar placeholder -->
+                        <Border Width="60" Height="60" CornerRadius="30" 
+                                Background="#2E4057" Margin="0,0,16,0">
+                            <iconPacks:PackIconMaterial Kind="AccountCircle" 
+                                                        Width="32" Height="32" 
+                                                        Foreground="#667788"
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="PlayerNameText" 
+                                       Text="Gladiator Name"
+                                       FontSize="24" FontWeight="Bold" Foreground="White"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                <TextBlock x:Name="PlayerClassText" 
+                                           Text="Warrior" 
+                                           FontSize="13" Foreground="#FFD700"/>
+                                <TextBlock Text="  |  " Foreground="#334455"/>
+                                <TextBlock x:Name="PlayerLevelText" 
+                                           Text="Level 1" 
+                                           FontSize="13" Foreground="#AABBCC"/>
+                                <TextBlock Text="  |  " Foreground="#334455"/>
+                                <TextBlock x:Name="PlayerRecordText" 
+                                           Text="0-0 (0-0)" 
+                                           FontSize="13" Foreground="#AABBCC"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Right: Prestige & Location -->
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Prestige:" FontSize="12" Foreground="#667788" 
+                                       VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBlock x:Name="PrestigeValueText" Text="0" 
+                                       FontSize="20" FontWeight="Bold" Foreground="#FFD700"/>
+                            <iconPacks:PackIconMaterial Kind="Star" Width="14" Height="14" 
+                                                        Foreground="#FFD700" Margin="4,0,0,0" 
+                                                        VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,0">
+                            <TextBlock Text="Age:" FontSize="12" Foreground="#667788" 
+                                       VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBlock x:Name="PlayerAgeText" Text="18" 
+                                       FontSize="16" FontWeight="SemiBold" Foreground="#AABBCC"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,0">
+                            <iconPacks:PackIconMaterial Kind="MapMarker" Width="12" Height="12" 
+                                                        Foreground="#4FC3F7" Margin="0,0,4,0" 
+                                                        VerticalAlignment="Center"/>
+                            <TextBlock x:Name="PlayerLocationText" Text="Unknown City" 
+                                       FontSize="12" Foreground="#4FC3F7"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ======================================================== -->
+            <!-- ROW 2: Core Stats Bar -->
+            <!-- ======================================================== -->
+            <Border Style="{StaticResource CardStyle}">
+                <UniformGrid Columns="7">
+                    <!-- STR -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatSTR" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="STRENGTH"/>
+                    </StackPanel>
+                    <!-- AGI -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatAGI" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="AGILITY"/>
+                    </StackPanel>
+                    <!-- END -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatEND" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="ENDURANCE"/>
+                    </StackPanel>
+                    <!-- INT -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatINT" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="INTELLIGENCE"/>
+                    </StackPanel>
+                    <!-- WIS -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatWIS" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="WISDOM"/>
+                    </StackPanel>
+                    <!-- CHA -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatCHA" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="CHARISMA"/>
+                    </StackPanel>
+                    <!-- LCK -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource StatValueStyle}" 
+                                   x:Name="StatLCK" Text="--"/>
+                        <TextBlock Style="{StaticResource StatLabelStyle}" Text="LUCK"/>
+                    </StackPanel>
+                </UniformGrid>
+            </Border>
+
+            <!-- ======================================================== -->
+            <!-- ROW 3: Three-column layout -->
+            <!-- ======================================================== -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- LEFT: Last Fight / Recent Activity -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="LAST FIGHT" FontSize="12" FontWeight="SemiBold" 
+                                   Foreground="#667788" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="LastFightText" 
+                                   Text="No fights yet"
+                                   FontSize="18" Foreground="#556677" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"
+                                   Margin="0,20"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- CENTER: Turn Checklist -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="TURN CHECKLIST" FontSize="12" FontWeight="SemiBold" 
+                                   Foreground="#667788" Margin="0,0,0,12"/>
+
+                        <!-- Checklist items -->
+                        <Border BorderBrush="#2A2A4A" BorderThickness="0,0,0,1" Padding="0,8" Margin="0,0,0,4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <iconPacks:PackIconMaterial Kind="Sword" Width="16" Height="16" 
+                                                            Foreground="#4FC3F7" Margin="0,0,10,0" 
+                                                            VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Train" Style="{StaticResource LinkTextStyle}"/>
+                                    <TextBlock Text="Practice combat skills at the arena" 
+                                               Style="{StaticResource ChecklistSubTextStyle}"/>
+                                </StackPanel>
+                                <CheckBox Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border BorderBrush="#2A2A4A" BorderThickness="0,0,0,1" Padding="0,8" Margin="0,0,0,4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <iconPacks:PackIconMaterial Kind="Flask" Width="16" Height="16" 
+                                                            Foreground="#4FC3F7" Margin="0,0,10,0" 
+                                                            VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Check Inventory" Style="{StaticResource LinkTextStyle}"/>
+                                    <TextBlock Text="Review potions and equipment" 
+                                               Style="{StaticResource ChecklistSubTextStyle}"/>
+                                </StackPanel>
+                                <CheckBox Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border BorderBrush="#2A2A4A" BorderThickness="0,0,0,1" Padding="0,8" Margin="0,0,0,4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <iconPacks:PackIconMaterial Kind="AccountGroup" Width="16" Height="16" 
+                                                            Foreground="#4FC3F7" Margin="0,0,10,0" 
+                                                            VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Visit Patron" Style="{StaticResource LinkTextStyle}"/>
+                                    <TextBlock Text="Check in with your patron for quests" 
+                                               Style="{StaticResource ChecklistSubTextStyle}"/>
+                                </StackPanel>
+                                <CheckBox Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Padding="0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <iconPacks:PackIconMaterial Kind="ShieldStar" Width="16" Height="16" 
+                                                            Foreground="#4FC3F7" Margin="0,0,10,0" 
+                                                            VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Review Skills" Style="{StaticResource LinkTextStyle}"/>
+                                    <TextBlock Text="Allocate skill points if available" 
+                                               Style="{StaticResource ChecklistSubTextStyle}"/>
+                                </StackPanel>
+                                <CheckBox Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- RIGHT: Next Match / Upcoming -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="NEXT MATCH" FontSize="12" FontWeight="SemiBold" 
+                                   Foreground="#667788" Margin="0,0,0,12"/>
+
+                        <!-- Match preview card -->
+                        <Border Background="#1E3A5F" CornerRadius="6" Padding="12">
+                            <StackPanel>
+                                <TextBlock x:Name="NextMatchTitle" 
+                                           Text="No match scheduled"
+                                           FontSize="13" Foreground="#AABBCC" 
+                                           HorizontalAlignment="Center" Margin="0,0,0,8"/>
+
+                                <TextBlock x:Name="NextMatchDetails" 
+                                           Text="" FontSize="11" 
+                                           Foreground="#556677" 
+                                           HorizontalAlignment="Center" Margin="0,0,0,12"/>
+
+                                <Button x:Name="PlayMatchButton" 
+                                        Content="Enter Arena"
+                                        Style="{StaticResource SmallActionButtonStyle}"
+                                        HorizontalAlignment="Center"
+                                        Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ======================================================== -->
+            <!-- ROW 4: Two-column bottom section -->
+            <!-- ======================================================== -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- LEFT: Reputation / Patron Status -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <TextBlock Text="PATRON STATUS" FontSize="12" FontWeight="SemiBold" 
+                                       Foreground="#667788"/>
+                            <Button Content="View Details" 
+                                    Style="{StaticResource SmallActionButtonStyle}"
+                                    HorizontalAlignment="Right"/>
+                        </Grid>
+
+                        <TextBlock x:Name="PatronStatusText" 
+                                   Text="No patron yet. Win arena matches to attract attention."
+                                   FontSize="13" Foreground="#556677" 
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- RIGHT: Injury Report / Status Effects -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <TextBlock Text="STATUS &amp; INJURIES" FontSize="12" FontWeight="SemiBold" 
+                                       Foreground="#667788"/>
+                            <Button Content="View Health" 
+                                    Style="{StaticResource SmallActionButtonStyle}"
+                                    HorizontalAlignment="Right"/>
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="Heart" Width="16" Height="16" 
+                                                        Foreground="#4CAF50" Margin="0,0,8,0" 
+                                                        VerticalAlignment="Center"/>
+                            <TextBlock x:Name="InjuryStatusText" 
+                                       Text="No injuries. Ready to fight."
+                                       FontSize="13" Foreground="#4CAF50" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
