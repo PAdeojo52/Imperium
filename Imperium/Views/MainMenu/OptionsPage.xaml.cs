@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace Imperium.Views.MainMenu
 {
     /// <summary>
     /// Interaction logic for OptionsPage.xaml
     /// </summary>
-    public partial class OptionsPage : Page
+    public partial class OptionsPage : MetroWindow
     {
         public OptionsPage()
         {
             InitializeComponent();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
