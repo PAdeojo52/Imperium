@@ -1,36 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Imperium.Engine.Data.EntityModels.Character;
+using Imperium.Engine.Data.EntityModels.Combat;
+using Imperium.Engine.Data.Enums.Combat;
+using Imperium.Engine.Services;
 using Imperium.Engine.Utilities;
 using Imperium.Views.Shell;
 
 namespace Imperium.Views.Dashboard
 {
-    /// <summary>
-    /// Interaction logic for Dashboard.xaml
-    /// </summary>
     public partial class Dashboard : UserControl, IRefreshable
     {
         public Dashboard()
         {
             InitializeComponent();
             LoadDashboardData();
-
         }
-        /// <summary>
-        /// Called by GameShellWindow after each turn advance.
-        /// </summary>
+
         public void Refresh()
         {
             LoadDashboardData();
@@ -41,45 +27,21 @@ namespace Imperium.Views.Dashboard
             LoadPlayerOverview();
             LoadPlayerStats();
             LoadNextMatch();
-            LoadPatronStatus();
-            LoadInjuryStatus();
         }
-
-        // =================================================================
-        //  Player Overview (Row 1)
-        // =================================================================
 
         private void LoadPlayerOverview()
         {
             var player = ApplicationUtilities.CurrentPlayer;
             if (player == null) return;
 
-            // Name
             string fullName = $"{player.FirstName} {player.LastName}".Trim();
             PlayerNameText.Text = string.IsNullOrEmpty(fullName) ? "Unknown Gladiator" : fullName;
-
-            // Class — TODO: look up class name from ClassID when class table is built
-            PlayerClassText.Text = "Gladiator"; // Placeholder
-
-            // Level
+            PlayerClassText.Text = "Gladiator";
             PlayerLevelText.Text = $"Level {player.Level}";
-
-            // Record — TODO: track wins/losses when combat system is built
             PlayerRecordText.Text = "0-0 (0-0)";
-
-            // Age
             PlayerAgeText.Text = player.Age.ToString();
-
-            // Prestige — TODO: pull from reputation system
             PrestigeValueText.Text = "0";
-
-            // Location — TODO: pull from world map / player location
-            PlayerLocationText.Text = "Starting City";
         }
-
-        // =================================================================
-        //  Core Stats (Row 2)
-        // =================================================================
 
         private void LoadPlayerStats()
         {
@@ -95,16 +57,9 @@ namespace Imperium.Views.Dashboard
             StatLCK.Text = player.Luck.ToString();
         }
 
-        // =================================================================
-        //  Next Match (Row 3 Right)
-        // =================================================================
-
         private void LoadNextMatch()
         {
-            // Check calendar for the next ArenaMatch event
-            var upcoming = GameManager.Calendar
-                .GetUpcomingEvents(30);
-
+            var upcoming = GameManager.Calendar.GetUpcomingEvents(30);
             var nextMatch = upcoming
                 .FirstOrDefault(e => e.EventType == Engine.Data.Enums.Calendar.CalendarEventType.ArenaMatch);
 
@@ -112,34 +67,87 @@ namespace Imperium.Views.Dashboard
             {
                 NextMatchTitle.Text = nextMatch.Title;
                 NextMatchDetails.Text = $"Scheduled: {nextMatch.ScheduledDate}";
-                PlayMatchButton.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 NextMatchTitle.Text = "No match scheduled";
-                NextMatchDetails.Text = "Visit an arena to sign up for a fight.";
-                PlayMatchButton.Visibility = System.Windows.Visibility.Collapsed;
+                NextMatchDetails.Text = "Visit an arena to sign up.";
             }
         }
 
         // =================================================================
-        //  Patron Status (Row 4 Left)
+        //  DEV TOOLS — REMOVE BEFORE RELEASE
         // =================================================================
 
-        private void LoadPatronStatus()
+        private void TestArenaMatch_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Pull from patron/reputation system when built
-            PatronStatusText.Text = "No patron yet. Win arena matches to attract attention.";
+            var player = ApplicationUtilities.CurrentPlayer;
+            if (player == null)
+            {
+                MessageBox.Show("No player loaded.", "Error");
+                return;
+            }
+
+            var playerCombatant = Combatant.FromPlayer(player);
+            playerCombatant.IsFanFavorite = true;
+
+            var opponent = Combatant.CreateNPC("Iron Fang", player.Level, 7);
+
+            var dice = new DiceService();
+            var combatService = new CombatService(dice);
+            var state = combatService.StartArenaMatch(
+                playerCombatant, opponent,
+                timeLimitSeconds: 600,
+                arenaName: "The Ashen Coliseum",
+                promoterName: "Marcus the Bold"
+            );
+
+            // TODO: Navigate to CombatView
+            // For now, show the combat state as confirmation
+            MessageBox.Show(
+                $"Arena Match Started!\n\n" +
+                $"{state.Player.Name} vs {state.Opponent.Name}\n" +
+                $"Arena: {state.ArenaName}\n" +
+                $"Promoter: {state.PromoterName}\n" +
+                $"Time Limit: {state.TimeLimitSeconds / 60} minutes\n" +
+                $"First Move: {state.ActiveFighter.Name}",
+                "Test Arena Match",
+                MessageBoxButton.OK);
+
+            // TODO: Replace MessageBox with:
+            // var combatView = new CombatView(combatService, state);
+            // Navigate to combatView via the GameShellWindow content area
         }
 
-        // =================================================================
-        //  Injury Status (Row 4 Right)
-        // =================================================================
-
-        private void LoadInjuryStatus()
+        private void TestBattle_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Pull from player health/debuff system when built
-            InjuryStatusText.Text = "No injuries. Ready to fight.";
+            var player = ApplicationUtilities.CurrentPlayer;
+            if (player == null)
+            {
+                MessageBox.Show("No player loaded.", "Error");
+                return;
+            }
+
+            var playerCombatant = Combatant.FromPlayer(player);
+            var opponent = Combatant.CreateNPC("Roadside Bandit", Math.Max(1, player.Level - 1), 6);
+
+            var dice = new DiceService();
+            var combatService = new CombatService(dice);
+            var state = combatService.StartBattle(playerCombatant, opponent);
+
+            // TODO: Navigate to CombatView
+            MessageBox.Show(
+                $"Battle Started!\n\n" +
+                $"{state.Player.Name} vs {state.Opponent.Name}\n" +
+                $"Mode: {state.Mode}\n" +
+                $"First Move: {state.ActiveFighter.Name}\n\n" +
+                $"(Combat UI coming next)",
+                "Test Battle",
+                MessageBoxButton.OK);
+
+            // TODO: Replace MessageBox with:
+            // var combatView = new CombatView(combatService, state);
+            // Navigate to combatView via the GameShellWindow content area
         }
     }
 }
